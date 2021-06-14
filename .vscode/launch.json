@@ -10,7 +10,8 @@
             "request": "launch",
             "mode": "auto",
             "program": "/Users/user/go/src/github.com/NeoGitCrt1/gosend/main.go",
-            "args": ["-u", "yusyang20121223@yahoo.com", "-p", "cdtuhgrbalryenwl", "-num", "2", "-to", "yusyang20121223@yahoo.com"]
+            "args": ["-u", "yusyang20121223@yahoo.com", "-p", "cdtuhgrbalryenwl", 
+                "-num", "2", "-to", "yusyang20121223@yahoo.com"]
         }
     ]
 }
