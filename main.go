@@ -4,9 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"net/smtp"
+	"strconv"
 	"strings"
 	"time"
 	_ "time"
+
+	gomail "gopkg.in/mail.v2"
 )
 
 // "cdtuhgrbalryenwl"
@@ -16,7 +19,8 @@ func main() {
 	num := flag.Int("num", 1, "how many to send")
 	u := flag.String("u", "", "username: xxx@yahoo.com")
 	p := flag.String("p", "", "generated app password")
-	body := []byte(*(flag.String("body", "Hello geeks!!!", "send mail body")))
+	body := flag.String("body", "Hello geeks!!!", "send mail body")
+	title := flag.String("title", "Hello geeks!!!", "send mail title")
 	host := flag.String("hp", "smtp.mail.yahoo.com:587", "host+port")
 
 	flag.Parse()
@@ -24,11 +28,28 @@ func main() {
 	auth := smtp.PlainAuth("", *u, *p, strings.Split(*host, ":")[0])
 	fmt.Println(auth)
 	fmt.Println(toList)
+
+	m := gomail.NewMessage()
+
+	// Set E-Mail sender
+	m.SetHeader("From", *u)
+
+	// Set E-Mail receivers
+	m.SetHeader("To", *to)
+
+	// Set E-Mail subject
+	m.SetHeader("Subject", *title)
+
+	// Set E-Mail body. You can set plain text or html with text/html
+	m.SetBody("text/plain", *body)
 	for i := 0; i < *num; i++ {
-		err := smtp.SendMail(*host, auth, *u, toList, body)
+
+		// Settings for SMTP server
+		intVar, _ := strconv.Atoi(strings.Split(*host, ":")[1])
+		d := gomail.NewDialer(strings.Split(*host, ":")[0], intVar, *u, *p)
 
 		// handling the errors
-		if err != nil {
+		if err := d.DialAndSend(m); err != nil {
 			fmt.Println(err)
 			return
 		}
