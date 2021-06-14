@@ -1,0 +1,16 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "/Users/user/go/src/github.com/NeoGitCrt1/gosend/main.go",
+            "args": ["-u", "yusyang20121223@yahoo.com", "-p", "cdtuhgrbalryenwl", "-num", "2", "-to", "yusyang20121223@yahoo.com"]
+        }
+    ]
+}
